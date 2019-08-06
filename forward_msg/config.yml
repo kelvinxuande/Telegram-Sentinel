@@ -1,0 +1,38 @@
+# Configuration yml file for forward_msg
+# Created by Kelvin Tan on 06/08/2019
+
+# Information to be obtained from 'API development tools'.
+api_id: 123456 # 6-digit integer.
+api_hash: 'abcdefghijklmnopqrstuvwxyz123456' # Long 32 characters hash identifier.
+session_name: 'chat_sentinel' # Session name - can be anything.
+
+# Supported modes of operation:
+    # channel-to-channel      - mode 1
+    # channel-to-group        - mode 2
+    # channel-to-person/bot   - mode 3
+    # group-to-channel        - mode 4
+    # group-to-group          - mode 5
+    # group-to-person/bot     - mode 6
+mode: '6'
+
+# The channel/ group names that you'd like to forward messages from.
+# The user running the client must have these present on dialogs.
+input_channel_names:
+  - 'tcs target 1'
+  - 'tcs target 2'
+
+# The output channel/ group/ person or bot name that the messages will be forwarded to.
+# If it is a channel, the user running the client must be an admin.
+# In all cases, output channel/ group/ person or bot must be present on dialogs.
+output_channel_name: 'chatSentinel_bot'
+
+# Trigger words to listen for.
+# These can be part of a word, or an entire word. Feel free to append more below.
+trigger_words:
+  - 'hello'
+  - 'test'
+
+# Key words to safely disconnect and stop script.
+# These can be part of a word, or an entire word. Feel free to append more below.
+quit_key_words:
+  - 'disconnect'
