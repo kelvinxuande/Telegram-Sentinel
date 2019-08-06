@@ -1,11 +1,11 @@
 # Telegram Chat Sentinel
-A backend python script that listens for trigger words as an indication to selectively forward messages from target(s) to destination.
+Backend python scripts that listen for trigger words as an indication to selectively forward messages from target(s) to destination.
 * 'Trigger word(s)' can be an entire word, or part of a word. This is designed to be singular, or in a list.
 * 'Target(s)' can be of any entity - users, chats or channels. This is designed to be singular, or in a list.
 * 'Destination' can be of any entity - chats or channels. This is designed to be singular.
 
 ## Use cases
-This script is meant to act as a filter - a solution that seeks to solve the two-part challenge of obtaining time-sensitive messages in 'noisy' entities.
+These scripts are meant to act as a filter - a solution that seeks to solve the two-part challenge of obtaining time-sensitive messages in 'noisy' entities.
 
 #### Where notifications can become bothersome
 1. In chats or channels, there might be thousands of messages exchanged in a day.
@@ -16,8 +16,8 @@ This script is meant to act as a filter - a solution that seeks to solve the two
 3. The 'conventional' approach is for the user to disable notifications; and manually, periodically use Telegram's in-built 'search' function to search for messages with trigger words.
 4. This is laborious and time-sensitive messages may not be responded to in time. Furthermore, there will always be a time-lag due to human limitations.
 
-With this script, messages containing the trigger words in target(s) are selectively forwarded to a 'destination' almost instantaneously.
-Users can then safely disable notifications for target(s) and enable them for the destination; and be timely notified of important messages. Note that the machine running the script needs to be kept 'alive' and running. 
+With these scripts, messages containing the trigger words in target(s) are selectively forwarded to a 'destination' almost instantaneously.
+Users can then safely disable notifications for target(s) and enable them for the destination; and be timely notified of important messages. Note that the machine running the scripts needs to be kept 'alive' and running. 
 
 ## Disclosures
 1. The author has personally tried-and-tested these methods but is not liable for any losses, including but not exhaustively telegram account(s) and data on these account(s). 
@@ -111,4 +111,5 @@ Feel free to collaborate and contribute to this project, or open an issue to sug
 
 ## Acknowledgments
 
-[voidbar](https://github.com/voidbar)
+- [voidbar](https://github.com/voidbar)
+- [Gareth Dwyer](https://www.codementor.io/garethdwyer/building-a-telegram-bot-using-python-part-1-goi5fncay)
