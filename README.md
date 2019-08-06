@@ -2,7 +2,7 @@
 A backend python script that listens for trigger words as an indication to selectively forward messages from target(s) to destination.
 * 'Trigger word(s)' can be an entire word, or part of a word. This is designed to be singular, or in a list.
 * 'Target(s)' can be of any entity - users, chats or channels. This is designed to be singular, or in a list.
-* 'Destination' can be of any entity - users, chats or channels. This is designed to be singular.
+* 'Destination' can be of any entity - chats or channels. This is designed to be singular.
 
 ## Use cases
 This script is meant to act as a filter - a solution that seeks to solve the two-part challenge of obtaining time-sensitive messages in 'noisy' entities.
@@ -27,21 +27,39 @@ Users can then safely disable notifications for target(s) and enable them for th
 1. [Telegram](https://web.telegram.org/) up-and-running, on any device
 2. [Python](https://www.python.org/downloads/), ver. 3.7 recommended
 3. [pip](https://pypi.org/project/pip/)
+4. [requests](https://pypi.org/project/requests/)
+
+## How it works
+The described behaviour is achieved by executing two seperate python scripts:
+1. forward_msg - Does the forwarding of messages between entities
+2. bot - Echos any messages (in this case, forwarded messages). These echos will be 'push-notified'.
+
+The bot  is necessary because any messages forwarded without it would already be deemed 'user acknowledged' by Telegram, and hence no push-notifications would be triggered.
+<br>The scripts were designed to be seperate because in some cases, only the features provided by the first script is desired.
 
 ## Preinstallation
+#### Create your own bot
+_Process to be done only once per account, per connection_
+1. Create your very own bot using botfather. This can be done by following the instructions found [here.](https://core.telegram.org/bots#6-botfather)
 #### Telegram
 _Process to be done only once per account, per connection_
-1. Login to Telegram core and obtain a telegram api_id.
+
+2. Login to Telegram core and obtain a telegram api_id.
    Instructions can be found [here](https://core.telegram.org/api/obtaining_api_id).</br>
    Fill up the form found at 'API development tools'.</br>
    For the 'URL' field, access your 'telegram' app > 'Settings' > 'Edit profile' > click on 'Username'.</br>
    Your URL looks something like: `https://t.me/kktann`</br>
    Fill up the rest of the form as desired.
 #### Zip
-2. Download and extract entire zipped repository
-3. Set-up config file.</br>
-   Navigate to main > config.yml</br>
+3. Download and extract entire zipped repository
+#### Setting up
+4. Set-up config file.</br>
+   Navigate to forward_msg > main > config.yml</br>
    Update lines with the comment header: `Information to be obtained from 'API development tools'`</br>
+   The remaining lines have already been initialised for you in order to successfully carry out the tests further below.
+5. Set-up bot file.</br>
+   Navigate to bot > run_bot</br>
+   Copy and paste your bot token from step 1 within the quotes for the line under the comment `copy and paste your bot token in the line below`</br>
    The remaining lines have already been initialised for you in order to successfully carry out the tests further below.
 
 ## Installing
@@ -51,25 +69,27 @@ Run command to install requirements:
 
 ## Running the tests
 
-1. Create the following channels on Telegram for testing:
+1. Create the following groups and add the bot in it (since there must be at least 2 entities in a group) on Telegram for testing:
    * tcs target 1
    * tcs target 2
-   * tcs destination
-2. Open a command prompt in the main directory/ folder
+2. Open a command prompt in the bot directory/ folder
 3. Run command to execute script
-   ```python chat_sentinel.py config.yml```
-4. In both **tcs target 1** and **tcs target 2**, broadcast the following test messages:
+   ```python run_bot.py```
+4. Open a command prompt in the forward_msg directory/ folder
+5. Run command to execute script
+   ```python main.py config.yml```
+6. In both **tcs target 1** and **tcs target 2** groups, send the following test messages:
    * *Hello there*
    * *Testing one, two, three*
-5. The test messages broadcasted in target channels should be instaneously forwarded to **tcs destination**.
-6. **Tests completed and successful!**
-7. To properly shutdown the script, broadcast a word found in config.yml under `quit_key_words`. The test default has been initialised to *disconnect*. 
+7. The test messages broadcasted in target groups should be instaneously forwarded to your bot.
+8. Your bot will then echo the messages it received (the messages you forwarded to it). Push-notifications would be triggered.
+8. **Tests completed and successful!**
 
 ## Deployment
 This process is done only once per account.
-1. Set-up config file as desired, as shown above.
+1. Set-up config file and bot file as desired, as shown above.
 2. Requirements should already be installed if the instructions above were followed.
-3. Run command to execute script, as shown above.
+3. Run the commands to execute both scripts, as shown above.
 
 Points to note:
 * Machine running the script needs to be kept 'alive' and running.
